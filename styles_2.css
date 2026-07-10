@@ -1,0 +1,701 @@
+/* ============================================================
+   Furry Tail — Styles (V2)
+   Warm Premium Editorial Grid & Carousel
+   ============================================================ */
+
+:root {
+  /* Brand color tokens */
+  --brand-sage: #7BA05B;
+  --brand-orange: #E8903A;
+  --brand-cream: #FAF8F4;
+  --brand-taupe: #8C8C7A;
+  --brand-near-black: #2A2A2A;
+  
+  /* Layout borders (will be driven dynamically for styling harmony) */
+  --hairline-color: rgba(79, 38, 0, 0.16);
+  
+  /* Scent-based variables (updated dynamically via JS) */
+  --theme-bg: #FFE6CC;       /* bright peach/cream for Santal by default */
+  --theme-bg-accent: #FFD1A9;
+  --theme-text: #4F2600;     /* deep espresso brown for Santal */
+  --theme-text-soft: #8A4E1B;
+  
+  /* Motion & easing */
+  --transition-speed: 0.85s;
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-color-flow: cubic-bezier(0.25, 1, 0.4, 1);
+}
+
+/* ---------- Global Reset & Setup ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Nunito", system-ui, -apple-system, sans-serif;
+  color: var(--theme-text);
+  background-color: var(--brand-cream);
+  height: 100vh;
+  overflow: hidden; /* Page locked to single viewport */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Dynamic Background Backdrop ---------- */
+.backdrop-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+#backdrop-base {
+  z-index: -5;
+  background-color: var(--theme-bg);
+}
+
+/* The sweep layer grows from the Next button and spreads BEHIND content */
+#backdrop-sweep {
+  z-index: -4;
+  background-color: var(--theme-bg);
+  clip-path: circle(0px at var(--sweep-origin, 78% 40%));
+  will-change: clip-path;
+}
+
+#backdrop-sweep.sweeping {
+  clip-path: circle(150vmax at var(--sweep-origin, 78% 40%));
+  transition: clip-path 3.8s var(--ease-color-flow); /* Slow, majestic liquid color wipe visible to eyes */
+}
+
+/* Transitions for slow color adjustments on typography, buttons, and layouts */
+.hero-title, 
+.hero-desc, 
+.category-tag, 
+.nav-links a, 
+.lang-select, 
+.cart-icon, 
+.item-scent, 
+.item-price, 
+.add-to-cart-btn, 
+.circle-next-button, 
+.card-title, 
+.circle-btn-read,
+.logo-box,
+body {
+  transition: 
+    color 3.2s var(--ease-color-flow), 
+    border-color 3.2s var(--ease-color-flow), 
+    background-color 3.2s var(--ease-color-flow);
+}
+
+.hero-container, 
+.header-grid, 
+.left-panel, 
+.bottom-card, 
+.right-panel::before, 
+.item-metadata {
+  transition: border-color 3.2s var(--ease-color-flow);
+}
+
+/* ---------- Layout Scaffold ---------- */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  border-left: 1px solid var(--hairline-color);
+  border-right: 1px solid var(--hairline-color);
+  position: relative;
+  background: transparent;
+}
+
+/* ---------- Header Navigation ---------- */
+.header-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--hairline-color);
+  padding: 1.5rem 3rem;
+  z-index: 10;
+}
+
+.logo-box {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.logo-furry {
+  color: var(--brand-sage);
+}
+.logo-tail {
+  color: var(--brand-orange);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--theme-text);
+  opacity: 0.7;
+  transition: opacity 0.3s ease, color var(--transition-speed) var(--ease-out-quint);
+}
+.nav-links a:hover {
+  opacity: 1;
+}
+.nav-links a.active {
+  opacity: 1;
+  font-weight: 800;
+  position: relative;
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--brand-orange);
+  border-radius: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.75rem;
+}
+.lang-select {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--theme-text);
+  cursor: pointer;
+  transition: color var(--transition-speed) var(--ease-out-quint);
+}
+.cart-icon {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--theme-text);
+  cursor: pointer;
+  display: inline-flex;
+  padding: 6px;
+  transition: transform 0.2s ease, color var(--transition-speed) var(--ease-out-quint);
+}
+.cart-icon:hover {
+  transform: scale(1.05);
+}
+.cart-count {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background-color: var(--brand-orange);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 0 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ---------- Main Grid Layout ---------- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* left panel (54.5%), right panel (45.5%) */
+  flex-grow: 1;
+  min-height: 0; /* allows grid items to shrink */
+  overflow: hidden;
+}
+
+/* ---------- Left Panel (Content & Copy) ---------- */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid var(--hairline-color);
+  padding: clamp(2.5rem, 5vh, 4rem) clamp(3rem, 5vw, 5rem);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  max-width: 38rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.category-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-sage);
+  margin-bottom: clamp(1rem, 2.5vh, 1.75rem);
+}
+
+.hero-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--theme-text);
+  margin-bottom: clamp(1.2rem, 3vh, 2rem);
+  transition: color var(--transition-speed) var(--ease-out-quint);
+}
+
+.hero-desc {
+  font-family: "Lato", sans-serif;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--theme-text-soft);
+  max-width: 32rem;
+  margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem);
+  transition: opacity 0.35s ease, transform 0.35s ease, color var(--transition-speed) var(--ease-out-quint);
+}
+.hero-desc.text-transitioning {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.cta-pill {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--theme-text);
+  background: transparent;
+  border: 1.5px solid var(--theme-text);
+  border-radius: 999px;
+  padding: 1.1rem 3rem;
+  cursor: pointer;
+  transition: 
+    background-color 0.4s var(--ease-out-quint), 
+    color 0.4s var(--ease-out-quint), 
+    border-color 3.2s var(--ease-color-flow),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cta-pill:hover {
+  background-color: var(--theme-text);
+  color: var(--brand-cream);
+  transform: scale(1.04);
+}
+.cta-pill:active {
+  transform: scale(0.96);
+}
+
+/* Bottom teaser card */
+.bottom-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-top: 1px solid var(--hairline-color);
+  padding-top: clamp(1.5rem, 3vh, 2.2rem);
+  margin-top: auto;
+  position: relative;
+}
+
+.card-image-box {
+  width: 90px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--theme-bg-accent);
+  transition: background-color var(--transition-speed) var(--ease-out-quint);
+}
+.botanical-art {
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(123, 160, 91, 0.45), transparent 70%),
+    radial-gradient(circle at 80% 70%, rgba(232, 144, 58, 0.35), transparent 70%);
+}
+
+.card-details {
+  flex-grow: 1;
+}
+.card-subtitle {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--brand-sage);
+  margin-bottom: 0.25rem;
+}
+.card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--theme-text);
+  margin-bottom: 0.3rem;
+  transition: color var(--transition-speed) var(--ease-out-quint);
+}
+.card-text {
+  font-family: "Lato", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--brand-taupe);
+  max-width: 25rem;
+}
+
+.circle-btn-read {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1.5px solid var(--hairline-color);
+  background: transparent;
+  color: var(--theme-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: 
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+    border-color 0.4s var(--ease-out-quint), 
+    background-color 0.4s var(--ease-out-quint), 
+    color 0.4s var(--ease-out-quint);
+}
+.circle-btn-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+.circle-btn-read:hover {
+  transform: scale(1.12);
+  border-color: var(--brand-sage);
+  background-color: var(--brand-sage);
+  color: #fff;
+}
+.circle-btn-read:active {
+  transform: scale(0.92);
+}
+
+/* ---------- Right Panel (Carousel) ---------- */
+.right-panel {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Static vertical dividing line that splits the right panel into 2 equal halves */
+.right-panel::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--hairline-color);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+  width: 250%; /* 5 items total, each 50% of parent width = 250% */
+  transform: translateX(-20%); /* starts focused on Index 1 (Santal) */
+  will-change: transform;
+}
+
+.carousel-track.smooth-transition {
+  transition: transform var(--transition-speed) var(--ease-out-quint);
+}
+
+.carousel-item {
+  width: 20%; /* 1/5th of 250% = 50% of the right-panel viewport */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(2rem, 5vh, 4rem) 2rem clamp(2rem, 4vh, 3rem);
+  opacity: 0.3;
+  transform: scale(0.85);
+  transition: opacity var(--transition-speed) var(--ease-out-quint), transform var(--transition-speed) var(--ease-out-quint);
+  border-right: 1px dashed rgba(42, 42, 42, 0.05); /* very soft reference border */
+}
+
+/* Focused active item (Column 2) */
+.carousel-item.active {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.bottle-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 0;
+}
+.bottle-wrapper img {
+  height: 90%;
+  max-height: clamp(300px, 50vh, 500px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(42, 30, 20, 0.15));
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+.carousel-item.active .bottle-wrapper img:hover {
+  transform: translateY(-8px) scale(1.03);
+  filter: drop-shadow(0 30px 45px rgba(42, 30, 20, 0.22));
+}
+
+.item-metadata {
+  width: 100%;
+  max-width: 260px;
+  margin: 1.5rem auto 0;
+  border-top: 1px solid var(--hairline-color);
+  padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.item-scent {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text);
+  transition: color 2.0s var(--ease-color-flow);
+}
+.item-subtitle {
+  font-size: 0.8rem;
+  color: var(--brand-taupe);
+  margin-bottom: 0.5rem;
+}
+.item-purchase {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item-price {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--theme-text);
+  transition: color 2.0s var(--ease-color-flow);
+}
+.add-to-cart-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--theme-text);
+  background: transparent;
+  color: var(--theme-text);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 2.0s var(--ease-color-flow);
+}
+.add-to-cart-btn:hover {
+  background-color: var(--theme-text);
+  color: var(--brand-cream);
+  transform: scale(1.1);
+}
+
+/* ---------- Overlapping Next Button ---------- */
+.circle-next-button {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 1.5px solid var(--theme-text);
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 5;
+  overflow: hidden;
+  transition: 
+    background-color 3.2s var(--ease-color-flow),
+    color 3.2s var(--ease-color-flow),
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 3.2s var(--ease-color-flow);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.circle-next-button:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+.circle-next-button:active {
+  transform: translate(-50%, -50%) scale(0.92);
+}
+.btn-text {
+  position: relative;
+  z-index: 3;
+}
+.btn-ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--theme-bg-accent);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: background-color var(--transition-speed) var(--ease-out-quint);
+}
+.btn-ripple.rippling {
+  animation: next-ripple-effect 1.2s cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+@keyframes next-ripple-effect {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   Responsive Layout Styles
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .header-grid {
+    padding: 1.25rem 2rem;
+  }
+  .left-panel {
+    padding: clamp(2rem, 4vh, 3rem) clamp(2rem, 4vw, 3.5rem);
+  }
+  .hero-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .hero-container {
+    height: auto;
+    min-height: 100vh;
+    border-left: none;
+    border-right: none;
+  }
+  .header-grid {
+    grid-template-columns: auto 1fr auto;
+    padding: 1.1rem 1.5rem;
+  }
+  .nav-links {
+    display: none; /* Hide header nav links on smaller screens */
+  }
+  .hero-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* Put carousel above text details on mobile */
+  .right-panel {
+    order: -1;
+    min-height: 480px;
+    border-bottom: 1px solid var(--hairline-color);
+  }
+  .right-panel::before {
+    display: none; /* remove separating border */
+  }
+  
+  .carousel-item {
+    border-right: none;
+    padding: 2rem 1rem;
+  }
+  
+  .left-panel {
+    padding: 3rem 1.5rem 2.5rem;
+    border-right: none;
+  }
+  .content-wrapper {
+    margin: 0 0 3rem;
+  }
+  
+  .circle-next-button {
+    left: auto;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .circle-next-button:hover {
+    transform: translateY(-50%) scale(1.05);
+  }
+  .circle-next-button:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+  
+  .bottom-card {
+    flex-wrap: wrap;
+    gap: 1.2rem;
+  }
+  .circle-btn-read {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.6rem;
+  }
+  .circle-next-button {
+    width: 70px;
+    height: 70px;
+    right: 1rem;
+  }
+  .right-panel {
+    min-height: 420px;
+  }
+}
+
+/* ---------- Prefers-Reduced-Motion Fallbacks ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-layer,
+  .carousel-track,
+  .carousel-item,
+  .hero-desc,
+  .item-scent,
+  .item-price,
+  .add-to-cart-btn,
+  .circle-next-button {
+    transition: none !important;
+  }
+  .btn-ripple {
+    animation: none !important;
+  }
+}
