@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Furry Tail — Warm Premium Pet Care</title>
+  <meta name="description" content="Genuinely premium pet care with 99.5% naturally derived formulations and international fragrance profiles." />
+
+  <!-- Google Fonts: Humanist Serif for editorial headers, Nunito for warm brand typography, and Lato for body copy -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Dynamic full-viewport wash backdrop layers -->
+  <div id="backdrop-base" class="backdrop-layer" aria-hidden="true"></div>
+  <div id="backdrop-sweep" class="backdrop-layer" aria-hidden="true"></div>
+
+  <div class="hero-container" id="hero-app">
+    <!-- Top grid header -->
+    <header class="header-grid">
+      <div class="logo-box">
+        <span class="logo-furry">Furry</span><span class="logo-tail">tail</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#story">Our Story</a>
+        <a href="#shampoo" class="active">Shampoos</a>
+        <a href="#scents">Scent Stories</a>
+        <a href="#manifesto">Manifesto</a>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-select" type="button">EN <span aria-hidden="true">&#9662;</span></button>
+        <button class="cart-icon" type="button" aria-label="Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count">1</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main hero grid section -->
+    <main class="hero-grid">
+      <!-- Left Panel: Content + Ingredient story card -->
+      <section class="left-panel">
+        <div class="content-wrapper">
+          <span class="category-tag" id="product-tag">THE SUNDAY RITUAL</span>
+          <h1 class="hero-title" id="scent-headline">Santal & White&nbsp;Tea</h1>
+          <p class="hero-desc" id="scent-description">
+            Warm, grounding, and slightly milky. Sandalwood gives depth and intimacy while white tea lifts it clean and clear. The scent of a slow Sunday morning.
+          </p>
+          <div class="cta-group">
+            <button class="cta-pill" type="button">Discover the Ritual</button>
+          </div>
+        </div>
+
+        <!-- Bottom teaser card (inspired by wine-tasting card) -->
+        <div class="bottom-card">
+          <div class="card-image-box" aria-hidden="true">
+            <div class="botanical-art"></div>
+          </div>
+          <div class="card-details">
+            <span class="card-subtitle">INGREDIENT STORY</span>
+            <h3 class="card-title" id="ingredient-title">Probiotic Support</h3>
+            <p class="card-text" id="ingredient-desc">Radish root ferment supports skin microbiome health, protecting the natural coat barrier.</p>
+          </div>
+          <button class="circle-btn-read" type="button" aria-label="Read full story">
+            <span class="circle-btn-label">Read<br/>Story</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Right Panel: Grid columns holding active bottle and peeking bottle -->
+      <section class="right-panel">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carousel-track">
+            <!-- Product 0: Violet Leaf & Muslin -->
+            <article class="carousel-item" data-index="0">
+              <div class="bottle-wrapper">
+                <img src="bottle1.png" alt="Furry Tail Gentle Daily Shampoo — Violet Leaf &amp; Muslin" />
+              </div>
+              <div class="item-metadata">
+                <span class="item-scent">Violet Leaf &amp; Muslin</span>
+                <span class="item-subtitle">Gentle Daily Shampoo</span>
+                <div class="item-purchase">
+                  <span class="item-price">&#8377;545</span>
+                  <button class="add-to-cart-btn" type="button" aria-label="Add Violet Leaf &amp; Muslin to cart">+</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 1: Santal & White Tea (Active by Default) -->
+            <article class="carousel-item active" data-index="1">
+              <div class="bottle-wrapper">
+                <img src="bottle2.png" alt="Furry Tail Gentle Daily Shampoo — Santal &amp; White Tea" />
+              </div>
+              <div class="item-metadata">
+                <span class="item-scent">Santal &amp; White Tea</span>
+                <span class="item-subtitle">Gentle Daily Shampoo</span>
+                <div class="item-purchase">
+                  <span class="item-price">&#8377;545</span>
+                  <button class="add-to-cart-btn" type="button" aria-label="Add Santal &amp; White Tea to cart">+</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 2: Fig & Neroli -->
+            <article class="carousel-item" data-index="2">
+              <div class="bottle-wrapper">
+                <img src="bottle3.png" alt="Furry Tail Gentle Daily Shampoo — Fig &amp; Neroli" />
+              </div>
+              <div class="item-metadata">
+                <span class="item-scent">Fig &amp; Neroli</span>
+                <span class="item-subtitle">Gentle Daily Shampoo</span>
+                <div class="item-purchase">
+                  <span class="item-price">&#8377;545</span>
+                  <button class="add-to-cart-btn" type="button" aria-label="Add Fig &amp; Neroli to cart">+</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 3: Violet Leaf & Muslin (Clone for seamless infinite carousel loop) -->
+            <article class="carousel-item" data-index="3">
+              <div class="bottle-wrapper">
+                <img src="bottle1.png" alt="Furry Tail Gentle Daily Shampoo — Violet Leaf &amp; Muslin" />
+              </div>
+              <div class="item-metadata">
+                <span class="item-scent">Violet Leaf &amp; Muslin</span>
+                <span class="item-subtitle">Gentle Daily Shampoo</span>
+                <div class="item-purchase">
+                  <span class="item-price">&#8377;545</span>
+                  <button class="add-to-cart-btn" type="button" aria-label="Add Violet Leaf &amp; Muslin to cart">+</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Product 4: Santal & White Tea (Clone for seamless infinite carousel loop) -->
+            <article class="carousel-item" data-index="4">
+              <div class="bottle-wrapper">
+                <img src="bottle2.png" alt="Furry Tail Gentle Daily Shampoo — Santal &amp; White Tea" />
+              </div>
+              <div class="item-metadata">
+                <span class="item-scent">Santal &amp; White Tea</span>
+                <span class="item-subtitle">Gentle Daily Shampoo</span>
+                <div class="item-purchase">
+                  <span class="item-price">&#8377;545</span>
+                  <button class="add-to-cart-btn" type="button" aria-label="Add Santal &amp; White Tea to cart">+</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Overlapping circular "Next" button located on the grid column separator -->
+        <button class="circle-next-button" id="next-button" type="button" aria-label="Next fragrance">
+          <span class="btn-ripple" id="btn-ripple" aria-hidden="true"></span>
+          <span class="btn-text">Next</span>
+        </button>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
